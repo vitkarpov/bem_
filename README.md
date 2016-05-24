@@ -1,5 +1,7 @@
 # BEM Classname
 
+[![NPM version](https://badge.fury.io/js/bem_.png)](http://badge.fury.io/js/bem_)
+
 **An easy way to build BEM-like classes with amusing chain interface.**
 
 ```js
