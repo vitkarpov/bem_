@@ -1,14 +1,18 @@
 {
-  "name": "yet-another-bem-formatter",
+  "name": "bem_",
   "version": "1.0.0",
-  "description": "BEM classname generator",
-  "main": "index.js",
+  "description": "An easy way to build BEM-like classes with amusing chain interface",
+  "main": "lib/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha tests/**/*"
   },
   "author": "Viktor Karpov <viktor.s.karpov@gmail.com>",
   "license": "MIT",
   "devDependencies": {
-    "expect.js": "^0.3.1"
+    "expect.js": "^0.3.1",
+    "mocha": "^2.5.2",
+    "react": "^15.1.0",
+    "react-addons-test-utils": "^15.1.0",
+    "react-dom": "^15.1.0"
   }
 }

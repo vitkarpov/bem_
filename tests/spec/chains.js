@@ -1,13 +1,20 @@
-var BemFormatter = require('../lib');
-var expect = require('expect.js');
+const BEMClassName = require('../../lib');
+const expect = require('expect.js');
 
-describe('BemFormatter', function() {
+describe('Chains -> ', function() {
     beforeEach(function() {
-        this.formatter = new BemFormatter('block');
+        this.b = new BEMClassName('block');
     });
     it('self => block', function() {
-        expect(String(this.formatter)).to.be.equal('block');
+        expect(String(this.b)).to.be.equal('block');
     });
+    /**
+     * We should test chains of methods,
+     * for instance:
+     * - b.e('e1').e('e2').m('m1')
+     * - b.e('e1').m('m1').e('e2').m('m2')
+     * @type {Array}
+     */
     ([
         { chain: [
             { method: 'e', args: ['e1'] }
@@ -34,12 +41,24 @@ describe('BemFormatter', function() {
             { method: 'e', args: ['e2'] },
             { method: 'm', args: ['m2'] }
         ], expected: 'block__e1 block__e1_m1 block__e2 block__e2_m2' },
+        { chain: [
+            { method: 'e', args: ['e1'] },
+            { method: 'm', args: [null] }
+        ], expected: 'block__e1' },
+        { chain: [
+            { method: 'e', args: [null] },
+            { method: 'e', args: ['e2'] }
+        ], expected: 'block__e2' },
+        { chain: [
+            { method: 'e', args: ['e1'] },
+            { method: 'm', args: ['m1', 'v1'] }
+        ], expected: 'block__e1 block__e1_m1_v1' },
     ]).forEach((test) => {
         it(methodsChainToString(test.chain) + ' => "' + test.expected + '"', function() {
             test.chain.forEach((item) => {
-                this.formatter[item.method].apply(this.formatter, item.args);
+                this.b[item.method].apply(this.b, item.args);
             });
-            expect(String(this.formatter)).to.be.equal(test.expected);
+            expect(String(this.b)).to.be.equal(test.expected);
         });
     });
 });
@@ -63,7 +82,7 @@ function methodsChainToString(chain) {
     const l = chain.length - 1;
 
     return chain.reduce((memo, item, n) => {
-        memo += item.method + '(' + item.args.join() + ')';
+        memo += item.method + '("' + item.args.join() + '")';
         if (n < l) {
             memo += '.';
         }
