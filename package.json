@@ -1,0 +1,14 @@
+{
+  "name": "yet-another-bem-formatter",
+  "version": "1.0.0",
+  "description": "BEM classname generator",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Viktor Karpov <viktor.s.karpov@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "expect.js": "^0.3.1"
+  }
+}
