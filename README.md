@@ -41,6 +41,16 @@ const b = new BEMClassName('block', {
 String(b.e('button').m('red').e('aside'))
 ```
 
+You can make **chains of any length** to build several classes:
+
+```js
+const BEMClassName = require('bem_');
+const b = new BEMClassName('block');
+
+// block__foo block__bar block__bar_red block__baz
+b.e('foo').e('bar').m('red').e('baz')
+```
+
 ## React Mixin
 
 Mixin adds `b` to component\`s prototype. It's a link to the new instance created for the displayName of the component.
