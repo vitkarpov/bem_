@@ -53,4 +53,17 @@ describe('React Mixin -> ', function() {
             expect(String(this.dom.props.className)).to.be.equal('block1');
         });
     });
+    describe('[#3] mix className from the props -> ', function() {
+        beforeEach(function() {
+            const shallowRenderer = TestUtils.createRenderer();
+
+            shallowRenderer.render(
+                React.createElement(B1, { className: 'my-another-block' })
+            );
+            this.dom = shallowRenderer.getRenderOutput();
+        });
+        it('should add "my-another-block" from the props to block1__e1', function() {
+            expect(String(this.dom.props.className)).to.be.equal('block1__e1 my-another-block');
+        });
+    });
 });
