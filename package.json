@@ -1,6 +1,6 @@
 {
   "name": "bem_",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "An easy way to build BEM-like classes with amusing chain interface",
   "main": "lib/index.js",
   "scripts": {
