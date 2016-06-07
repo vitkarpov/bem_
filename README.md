@@ -12,6 +12,9 @@ const BEMClassName = require('bem_');
 // To return the actual classname you should cast the instance to String
 const b = new BEMClassName('block');
 
+// block
+String(b);
+
 // block__button
 String(b.e('button'));
 
@@ -49,6 +52,16 @@ const b = new BEMClassName('block');
 
 // block__foo block__bar block__bar_red block__baz
 b.e('foo').e('bar').m('red').e('baz')
+```
+
+You can concat **optional classes to chain**:
+
+```js
+const BEMClassName = require('bem_');
+const b = new BEMClassName('block');
+
+// block__foo block__bar block__bar_red block__baz block__baz_green custom-class or string of classes
+b.e('foo').e('bar').m('red').e('baz').concat('custom-class').concat('or string of classes').m('green')
 ```
 
 ## React Mixin
