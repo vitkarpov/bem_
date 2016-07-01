@@ -8,6 +8,9 @@
   },
   "author": "Viktor Karpov <viktor.s.karpov@gmail.com>",
   "license": "MIT",
+  "dependencies": {
+    "csjs": "https://github.com/vitkarpov/csjs#master"
+  },
   "devDependencies": {
     "expect.js": "^0.3.1",
     "mocha": "^2.5.2",
