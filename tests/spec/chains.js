@@ -1,6 +1,8 @@
 const BEMClassName = require('../../lib');
 const expect = require('expect.js');
 
+const { methodsChainToString } = require('../utils');
+
 describe('Chains -> ', function() {
     beforeEach(function() {
         this.b = new BEMClassName('block');
@@ -91,30 +93,3 @@ describe('Chains -> ', function() {
         });
     });
 });
-
-/**
- * Returns the chain of applied methods
- * in the string form (for description).
- *
- * @example
- * [{ method: 'e', args: ['e1'] },
- *  { method: 'm', args: ['m1'] },
- *  { method: 'e', args: ['e2'] },
- *  { method: 'm', args: ['m2'] }]
- *
- *  => e('e1').m('m1').e('e2').m('m2')
- *
- * @param  {Array} chain
- * @return {String}
- */
-function methodsChainToString(chain) {
-    const l = chain.length - 1;
-
-    return chain.reduce((memo, item, n) => {
-        memo += item.method + '(' + JSON.stringify(item.args).slice(1,-1) + ')';
-        if (n < l) {
-            memo += '.';
-        }
-        return memo;
-    }, '');
-}
