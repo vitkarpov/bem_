@@ -46,10 +46,6 @@ describe('Chains -> ', function() {
             { method: 'm', args: [null] }
         ], expected: 'block__e1' },
         { chain: [
-            { method: 'e', args: [null] },
-            { method: 'e', args: ['e2'] }
-        ], expected: 'block__e2' },
-        { chain: [
             { method: 'e', args: ['e1'] },
             { method: 'm', args: ['m1', 'v1'] }
         ], expected: 'block__e1 block__e1_m1_v1' },
@@ -76,8 +72,9 @@ describe('Chains -> ', function() {
         { chain: [
             { method: 'e', args: ['e1'] },
             { method: 'm', args: ['m1'] },
-            { method: 'concat', args: ['rock'] }
-        ], expected: 'block__e1 block__e1_m1 rock' },
+            { method: 'concat', args: ['rock'] },
+            { method: 'concat', args: [13] }
+        ], expected: 'block__e1 block__e1_m1 rock 13' },
         { chain: [
             { method: 'e', args: ['e1'] },
             { method: 'm', args: ['m1'] },
@@ -114,7 +111,7 @@ function methodsChainToString(chain) {
     const l = chain.length - 1;
 
     return chain.reduce((memo, item, n) => {
-        memo += item.method + '("' + item.args.join() + '")';
+        memo += item.method + '(' + JSON.stringify(item.args).slice(1,-1) + ')';
         if (n < l) {
             memo += '.';
         }
