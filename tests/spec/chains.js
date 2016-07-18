@@ -1,6 +1,8 @@
 const BEMClassName = require('../../lib');
 const expect = require('expect.js');
 
+const { methodsChainToString } = require('../utils');
+
 describe('Chains -> ', function() {
     beforeEach(function() {
         this.b = new BEMClassName('block');
@@ -46,10 +48,6 @@ describe('Chains -> ', function() {
             { method: 'm', args: [null] }
         ], expected: 'block__e1' },
         { chain: [
-            { method: 'e', args: [null] },
-            { method: 'e', args: ['e2'] }
-        ], expected: 'block__e2' },
-        { chain: [
             { method: 'e', args: ['e1'] },
             { method: 'm', args: ['m1', 'v1'] }
         ], expected: 'block__e1 block__e1_m1_v1' },
@@ -76,8 +74,9 @@ describe('Chains -> ', function() {
         { chain: [
             { method: 'e', args: ['e1'] },
             { method: 'm', args: ['m1'] },
-            { method: 'concat', args: ['rock'] }
-        ], expected: 'block__e1 block__e1_m1 rock' },
+            { method: 'concat', args: ['rock'] },
+            { method: 'concat', args: [13] }
+        ], expected: 'block__e1 block__e1_m1 rock 13' },
         { chain: [
             { method: 'e', args: ['e1'] },
             { method: 'm', args: ['m1'] },
@@ -94,30 +93,3 @@ describe('Chains -> ', function() {
         });
     });
 });
-
-/**
- * Returns the chain of applied methods
- * in the string form (for description).
- *
- * @example
- * [{ method: 'e', args: ['e1'] },
- *  { method: 'm', args: ['m1'] },
- *  { method: 'e', args: ['e2'] },
- *  { method: 'm', args: ['m2'] }]
- *
- *  => e('e1').m('m1').e('e2').m('m2')
- *
- * @param  {Array} chain
- * @return {String}
- */
-function methodsChainToString(chain) {
-    const l = chain.length - 1;
-
-    return chain.reduce((memo, item, n) => {
-        memo += item.method + '("' + item.args.join() + '")';
-        if (n < l) {
-            memo += '.';
-        }
-        return memo;
-    }, '');
-}
