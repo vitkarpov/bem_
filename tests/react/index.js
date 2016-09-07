@@ -25,6 +25,17 @@ const B1M1 = React.createClass({
         });
     }
 });
+const B1C = React.createClass({
+    displayName: 'block1',
+
+    mixins: [BemifyClassName],
+
+    render() {
+        return React.createElement('div', {
+            className: this.b.concat('foo')
+        });
+    }
+});
 const E1 = React.createClass({
     displayName: 'block1',
 
@@ -95,6 +106,19 @@ describe('React Mixin -> ', function() {
         });
         it('should make a className using displayName and specified element name', function() {
             expect(String(this.dom.props.className)).to.be.equal('block1__e1');
+        });
+    });
+    describe('this.b.concat("foo")', function() {
+        beforeEach(function() {
+            const shallowRenderer = TestUtils.createRenderer();
+
+            shallowRenderer.render(
+                React.createElement(B1C)
+            );
+            this.dom = shallowRenderer.getRenderOutput();
+        });
+        it('should concat "foo" to the className', function() {
+            expect(String(this.dom.props.className)).to.be.equal('block1 foo');
         });
     });
     describe('this.b()', function() {
