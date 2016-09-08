@@ -5,6 +5,7 @@ module.exports = {
         this.b.e = createMethodForBlock('e', this);
         this.b.m = createMethodForBlock('m', this);
         this.b.toString = createMethodForBlock('toString', this);
+        this.b.concat = createMethodForBlock('concat', this);
     },
 
     b(block) {
